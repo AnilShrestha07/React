@@ -1,9 +1,38 @@
+import { useState } from "react";
 import logo from "../../assets/images/logo.png"
 import { FaGoogle,FaFacebookF,FaPaperPlane  } from "react-icons/fa";
 
+
+interface ICredentials {
+    name: string;
+    email: string;
+}
+
 function HomePage() {
+
+    const [credentials, setCredentials] = useState<ICredentials>({
+        name: '',
+        email: ''
+    });
+
+    const submitLogin = (e: React.BaseSyntheticEvent)=>{
+        e.preventDefault()
+        console.log(credentials)
+    }
+
+
+    const handleChange = (e: React.BaseSyntheticEvent)=>{
+        const {name, value} = e.target;
+        setCredentials({
+            ...credentials,
+            [name]: value,
+        })
+    }
     return (
         <>
+       
+
+        
             <div className="flex justify-center h-screen  items-center bg-teal-100">
                 <div className="flex overflow-hidden shadow-2xl shadow-teal-100 w-[750px] h-[500px] rounded-xl">
                     <div className="flex flex-col justify-center items-center gap-8 box-border text-white p-5 text-justify flex-1 bg-teal-900">
@@ -18,9 +47,9 @@ function HomePage() {
 
                             <span className="shrink-0 ps-4 text-gray-900"></span>
                         </span>
-                        <form action="" className=" flex flex-col gap-3 w-full">
+                        <form onSubmit={submitLogin} className=" flex flex-col gap-3 w-full">
                             <label htmlFor="email" ></label>
-                            <input className="border border-teal-600 outline-none h-9 rounded p-1" type="email" name="email" placeholder="Email" />
+                            <input className="border border-teal-600 outline-none h-9 rounded p-1" id="nameyar" type="email" name="email" required={true} onChange={handleChange} placeholder="Email" />
 
                             <label htmlFor="password"></label>
                             <input className="border border-teal-600 h-9 outline-none rounded p-1" type="password" name="password" placeholder="Password" />

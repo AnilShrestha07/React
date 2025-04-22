@@ -1,33 +1,27 @@
-import { useState } from "react";
+
 import logo from "../../assets/images/logo.png"
-import { FaGoogle,FaFacebookF,FaPaperPlane  } from "react-icons/fa";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { LoginForm } from "../../components/auth/login-form.components";
 
 
-interface ICredentials {
-    name: string;
-    email: string;
-}
+
 
 function HomePage() {
 
-    const [credentials, setCredentials] = useState<ICredentials>({
-        name: '',
-        email: ''
-    });
-
-    const submitLogin = (e: React.BaseSyntheticEvent)=>{
-        e.preventDefault()
-        console.log(credentials)
-    }
+  
 
 
-    const handleChange = (e: React.BaseSyntheticEvent)=>{
-        const {name, value} = e.target;
-        setCredentials({
-            ...credentials,
-            [name]: value,
-        })
-    }
+    const {control,handleSubmit, formState: {errors}} =useForm({
+        defaultValues: {}
+    })
+
+    
+
+   
+
+    
+    
     return (
         <>
        
@@ -42,37 +36,13 @@ function HomePage() {
                     </div>
                     <div className="flex-1 p-6 bg-white">
                         <h1 className="font-semibold text-center text-4xl mb-4">Login</h1>
+                        <LoginForm />
                         <span className="flex items-center">
                             <span className="h-px flex-1 bg-gray-300"></span>
 
                             <span className="shrink-0 ps-4 text-gray-900"></span>
                         </span>
-                        <form onSubmit={submitLogin} className=" flex flex-col gap-3 w-full">
-                            <label htmlFor="email" ></label>
-                            <input className="border border-teal-600 outline-none h-9 rounded p-1" id="nameyar" type="email" name="email" required={true} onChange={handleChange} placeholder="Email" />
-
-                            <label htmlFor="password"></label>
-                            <input className="border border-teal-600 h-9 outline-none rounded p-1" type="password" name="password" placeholder="Password" />
-                            <p className="text-sm">By signing in, I agree with <a className="text-teal-700 mx-1 underline" href="/terms-and-conditions"> Terms and Conditions</a></p>
-                            <p className="text-sm text-end"><a className="text-teal-700 mx-1" href="/forget-password">Forget Password?</a></p>
-
-                            <button className="bg-teal-700 py-2 flex justify-center items-center gap-1 text-white rounded transition hover:scale-95 font-semibold cursor-pointer hover:bg-teal-800"><FaPaperPlane />Submit</button>
-                            <span className="flex items-center">
-                                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-gray-300"></span>
-
-                                <span className="shrink-0 px-4 text-gray-900">Or</span>
-
-                                <span className="h-px flex-1 bg-gradient-to-l from-transparent to-gray-300"></span>
-                            </span>
-                            <p className="text-sm">Don't Have an account?<a className="text-teal-700 mx-1 underline" href="/register"> Signup Now!</a></p>
-                            <button className="bg-red-700 py-2 flex justify-center items-center gap-1 text-white rounded transition hover:scale-95 font-semibold cursor-pointer hover:bg-red-800">
-                                <FaGoogle />
-                            Login with Google</button>
-
-                            <button className="bg-blue-700 py-2 flex justify-center items-center gap-1 text-white rounded transition hover:scale-95 font-semibold cursor-pointer hover:bg-blue-800"><FaFacebookF />Login with Facebook</button>
-
-
-                        </form>
+                        
 
                     </div>
                 </div>
